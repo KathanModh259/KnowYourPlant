@@ -4,26 +4,21 @@ applications:
       phases:
         preBuild:
           commands:
-            - echo "Current directory:"
-            - pwd
-            - echo "Listing root contents:"
-            - ls -la
-            - echo "Changing directory to frontend"
-            - cd plant-scanner/frontend
-            - npm ci
+            - npm install -g pnpm
         build:
           commands:
-            - echo "Building frontend"
+            - echo "Building Frontend..."
             - cd plant-scanner/frontend
+            - npm install
             - npm run build
-            - echo "Build complete. checking dist:"
-            - ls -la dist || echo "dist not found"
-            - echo "Checking parent dir:"
-            - ls -la ..
-            - echo "Checking root from here:"
-            - ls -la ../..
+            - cd ../..
+            - echo "Moving dist to root..."
+            - rm -rf dist
+            - mv plant-scanner/frontend/dist dist
+            - echo "Listing root dist:"
+            - ls -la dist
       artifacts:
-        baseDirectory: plant-scanner/frontend/dist
+        baseDirectory: dist
         files:
           - '**/*'
       cache:
