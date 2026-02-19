@@ -4,6 +4,10 @@ applications:
       phases:
         preBuild:
           commands:
+            - echo "Current directory:"
+            - pwd
+            - echo "Listing root contents:"
+            - ls -la
             - echo "Changing directory to frontend"
             - cd plant-scanner/frontend
             - npm ci
@@ -12,8 +16,12 @@ applications:
             - echo "Building frontend"
             - cd plant-scanner/frontend
             - npm run build
-            - echo "Build complete. Listing dist directory:"
-            - ls -la dist
+            - echo "Build complete. checking dist:"
+            - ls -la dist || echo "dist not found"
+            - echo "Checking parent dir:"
+            - ls -la ..
+            - echo "Checking root from here:"
+            - ls -la ../..
       artifacts:
         baseDirectory: plant-scanner/frontend/dist
         files:
