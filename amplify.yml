@@ -4,15 +4,18 @@ applications:
       phases:
         preBuild:
           commands:
+            - echo "Changing directory to frontend"
+            - cd plant-scanner/frontend
             - npm ci
         build:
           commands:
+            - echo "Building frontend"
+            - cd plant-scanner/frontend
             - npm run build
       artifacts:
-        baseDirectory: dist
+        baseDirectory: plant-scanner/frontend/dist
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
-    appRoot: plant-scanner/frontend
+          - plant-scanner/frontend/node_modules/**/*
