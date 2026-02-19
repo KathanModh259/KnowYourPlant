@@ -12,6 +12,8 @@ applications:
             - echo "Building frontend"
             - cd plant-scanner/frontend
             - npm run build
+            - echo "Build complete. Listing dist directory:"
+            - ls -la dist
       artifacts:
         baseDirectory: plant-scanner/frontend/dist
         files:
