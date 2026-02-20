@@ -1,0 +1,7 @@
+Tensor Stats: Min=-2.118, Max=2.640, Mean=-0.381
+Top 5 Predictions:
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot: 0.6133
+Strawberry___Leaf_scorch: 0.3706
+Tomato___Early_blight: 0.0088
+Pepper,_bell___healthy: 0.0034
+Cherry_(including_sour)___healthy: 0.0028
