@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login, register, getMe } from '../api/client'
 import { useAuth } from '../context/AuthContext'
+import { GoogleLogin } from '@react-oauth/google'
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 const Icons = {
@@ -303,6 +304,32 @@ export default function AuthPage() {
                         </form>
 
                         <div className="auth-or-divider">or</div>
+
+                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                            <GoogleLogin
+                                onSuccess={async (credentialResponse) => {
+                                    setLoading(true)
+                                    setError('')
+                                    try {
+                                        // loginWithGoogle needs to be imported, I'll update it at top
+                                        const { loginWithGoogle, getMe } = await import('../api/client')
+                                        const res = await loginWithGoogle(credentialResponse.credential)
+                                        localStorage.setItem('token', res.data.access_token)
+                                        const me = await getMe()
+                                        setUser(me.data)
+                                        navigate('/dashboard')
+                                    } catch (err) {
+                                        setError(err.response?.data?.detail || 'Google Login failed.')
+                                    } finally {
+                                        setLoading(false)
+                                    }
+                                }}
+                                onError={() => {
+                                    setError('Google Sign In was unsuccessful.')
+                                }}
+                                useOneTap
+                            />
+                        </div>
 
                         <div className="auth-switch-row">
                             {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
