@@ -86,11 +86,9 @@ function ScannerSection() {
 
     const handleScan = async () => {
         if (!preview) return
-        setScanning(true)
-        setResult(null)
-        await new Promise(r => setTimeout(r, 2200))
-        setResult(MOCK)
-        setScanning(false)
+        // Instead of showing the mock 2.2 second Monstera result, direct them to sign in
+        window.alert("Please sign in or create an account to view AI identification results.")
+        window.location.href = '/auth'
     }
 
     return (
