@@ -34,3 +34,13 @@ yarn-error.log*
 *.pem
 *.key
 id_rsa
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives
+*.tar.gz
+*.zip
+*.rar
